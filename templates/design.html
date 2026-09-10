@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- ñ is accepted -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPCAT FORM 2A</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .header {
+            background: #6b0723;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 21px;
+            color: #123b5d;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e5e5;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #123b5d;
+            box-shadow: 0 0 0 2px rgba(18, 59, 93, 0.1);
+        }
+
+        .campus-box {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        .campus-box h3 {
+            margin-top: 0;
+            color: #123b5d;
+        }
+
+        .programs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background: #123b5d;
+            color: white;
+            border: none;
+            padding: 14px 45px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d2d47;
+        }
+
+        .required {
+            color: #c62828;
+        }
+
+        @media (max-width: 700px) {
+            .form-grid,
+            .programs {
+                grid-template-columns: 1fr;
+            }
+
+            .form-card {
+                padding: 22px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>UPCAT Application Form</h1>
+        <p>UPCAT FORM 2A</p>
+    </header>
+
+    <main class="container">
+
+        <form class="form-card" id="applicationForm" method="POST" action="{{ url_for('submit_application') }}">
+
+            <!-- PERSONAL INFORMATION -->
+            <section class="section">
+                <h2 class="section-title">Personal Information</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="firstName">
+                            First Name <span class="required">*</span>
+                        </label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">
+                            Last Name <span class="required">*</span>
+                        </label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="middleName">
+                            Middle Name
+                        </label>
+                        <input type="text" id="middleName" name="middleName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday">
+                            Birthday <span class="required">*</span>
+                        </label>
+                        <input type="date" id="birthday" name="birthday" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="mother">
+                            Mother's Maiden Name <span class="required">*</span>
+                        </label>
+                        <input type="text" id="mother" name="mother" required>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ADDRESS -->
+            <section class="section">
+                <h2 class="section-title">Home Address</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+                        <label for="address">
+                            Complete Address <span class="required">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="address"
+                            name="address"
+                            placeholder="House No., Street, Barangay, City/Municipality, Province"
+                            required
+                        >
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- SENIOR HIGH SCHOOL -->
+            <section class="section">
+                <h2 class="section-title">Senior High School Information</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="school">
+                            Name of School <span class="required">*</span>
+                        </label>
+                        <input type="text" id="school" name="school" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="strand">
+                            SHS Strand <span class="required">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="strand"
+                            name="strand"
+                            placeholder="e.g. STEM, HUMSS, ABM"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="schoolAddress">
+                            Address of School <span class="required">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="schoolAddress"
+                            name="schoolAddress"
+                            placeholder="School address"
+                            required
+                        >
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- CAMPUS PREFERENCES -->
+            <section class="section">
+
+                <h2 class="section-title">Campus and Degree Program Preferences</h2>
+
+                <!-- FIRST CAMPUS -->
+                <div class="campus-box">
+
+                    <h3>First Choice of Campus</h3>
+
+                    <div class="form-group">
+                        <label for="campus1">
+                            Campus <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="campus1"
+                            name="campus1"
+                            placeholder="Enter your first-choice campus"
+                            required
+                        >
+                    </div>
+
+                    <br>
+
+                    <label>
+                        Degree Program Choices
+                    </label>
+
+                    <div class="programs">
+
+                        <div class="form-group">
+                            <label for="program1_1">Choice 1</label>
+                            <input
+                                type="text"
+                                id="program1_1"
+                                name="program1_1"
+                                placeholder="Degree Program"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="program1_2">Choice 2</label>
+                            <input
+                                type="text"
+                                id="program1_2"
+                                name="program1_2"
+                                placeholder="Degree Program"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="program1_3">Choice 3</label>
+                            <input
+                                type="text"
+                                id="program1_3"
+                                name="program1_3"
+                                placeholder="Degree Program"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="program1_4">Choice 4</label>
+                            <input
+                                type="text"
+                                id="program1_4"
+                                name="program1_4"
+                                placeholder="Degree Program"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECOND CAMPUS -->
+                <div class="campus-box">
+
+                    <h3>Second Choice of Campus</h3>
+
+                    <div class="form-group">
+                        <label for="campus2">
+                            Campus <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="campus2"
+                            name="campus2"
+                            placeholder="Enter your second-choice campus"
+                            required
+                        >
+                    </div>
+
+                    <br>
+
+                    <label>
+                        Degree Program Choices
+                    </label>
+
+                    <div class="programs">
+
+                        <div class="form-group">
+                            <label for="program2_1">Choice 1</label>
+                            <input
+                                type="text"
+                                id="program2_1"
+                                name="program2_1"
+                                placeholder="Degree Program"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="program2_2">Choice 2</label>
+                            <input
+                                type="text"
+                                id="program2_2"
+                                name="program2_2"
+                                placeholder="Degree Program"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="program2_3">Choice 3</label>
+                            <input
+                                type="text"
+                                id="program2_3"
+                                name="program2_3"
+                                placeholder="Degree Program"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="program2_4">Choice 4</label>
+                            <input
+                                type="text"
+                                id="program2_4"
+                                name="program2_4"
+                                placeholder="Degree Program"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SUBMIT -->
+            <div class="submit-area">
+                <button type="submit">Submit Application</button>
+            </div>
+
+        </form>
+
+    </main>
+
+
+
+</body>
+</html>
